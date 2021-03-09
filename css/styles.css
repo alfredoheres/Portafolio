@@ -18,7 +18,8 @@
     --sea-foam: #a7b3a5;
 
     --forest: #015249;
-
+    --sizeCaruselCard: 70vW;
+    --sizeCaruselCardHeight: 100%;
 }
 *{
     box-sizing: border-box;
@@ -34,7 +35,7 @@ body{
 /* ---------------------------------------  MENU  --------------------------------------- */
 .menu{
     display: flex;
-    width: 100vw;
+    width: 100%;
     height: 3.2em;
     background: none;
     position: fixed;
@@ -216,6 +217,7 @@ body{
 
 }
 .who-am-i__question {
+    margin-top: 1em;
     text-align: center;
     display: block;
 }
@@ -234,8 +236,8 @@ body{
 }
 .technologies-container{
     display: grid;
-    grid-template-columns: 8em 8em 8em;
-    grid-template-rows: 8em 8em;
+    grid-template-columns: 6em 6em 6em;
+    grid-template-rows: 6em 6em 6em;
     
 }
 .technologie-box{
@@ -245,9 +247,12 @@ body{
     align-items: center;
 }
 .technologie-box__img{
-    height: 5em;
-    width: 5em;
+    height: 4em;
+    width: 4em;
     object-fit: cover;
+}
+.technologie-box span{
+    font-size: 0.8em;
 }
 
 /* --------------------------------------  PORTFOLIO  ------------------------------------- */
@@ -272,6 +277,7 @@ body{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center;
 }
 .carousel{
     width: 80%;
@@ -289,16 +295,17 @@ body{
     justify-content: center;
     flex-direction: column;
     position: relative;
+    z-index: 100;
+    font-size: 16px;
 
 }
 .card-info{
-    height: 100%;
-    width: 50vw;
+    height: var(--sizeCaruselCardHeight);
+    width: var(--sizeCaruselCard);
     position: absolute;
     display: flex;
     flex-direction: column;
     z-index: 200;
-    
     align-items: center;
     justify-content: center;
     transition: 0.5s;
@@ -306,13 +313,62 @@ body{
     
 
 }
+.card-info h4{
+   
+    border-radius: 0.2em;
+    color: #ffffff;
+    margin: 0.2em 0.2em 1.5em;
+    font-size: 2em;
+
+}
+.card-info p{
+    text-align: center;
+    border-radius: 0.2em;
+    padding: 0.1em;
+    margin: 0.1em;
+    color: #ffffff;
+}
+.btn-project{
+    width: 90%;
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-evenly;
+}
+.btn-lyric-website{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--forest);
+    background-color: #a9b0ce;
+    border-radius: 6px;
+    border: 1px solid var(--forest);
+  }
+  .btn-lyric-website:hover{
+    color: var(--forest);
+    background-color: #a0a8cc;
+  }
+  .btn-lyric-repository{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--forest);
+    background-color: #a9b0ce;
+    border-radius: 6px;
+    border: 1px solid var(--forest);
+  }
+  .btn-lyric-repository:hover{
+    color: var(--forest);
+    background-color: #a0a8cc;
+  }
 .card-info-background{
-    height: 100%;
-    width: 50vw;
+    height: var(--sizeCaruselCardHeight);
+    width: var(--sizeCaruselCard);
     position: absolute;
-    background: #000000;
+    background: var(--rust);
     z-index: 99;
-    opacity: 0.5;
+    opacity: 0.9;
     bottom: -100%;
     
 }
@@ -335,9 +391,10 @@ body{
     right: -0.7em;
 }
 .carousel__element img{
-    height: 100%;
-    width: 50vw;
+    height: var(--sizeCaruselCardHeight);
+    width: var(--sizeCaruselCard);
     object-fit: cover;
+    opacity: 0.95;
 }
 .carousel__element:hover > .card-info-background{
     bottom: 0%;
@@ -347,6 +404,31 @@ body{
     bottom: 0%;
     transition: 0.5s;
 }
+@media(max-width: 900px){
+    :root{
+        --sizeCaruselCard: 80vw;
+        --sizeCaruselCardHeight: 100%;
+    }
+}
+@media(max-width: 700px) {
+    .carousel__element{
+        font-size: 12px;
+    }
+    .card-info-background{
+        bottom: 0%;
+        transition: 0.5s;
+    }
+    .card-info{
+        bottom: 0%;
+        transition: 0.5s;
+    }
+    :root{
+        --sizeCaruselCard: 100%;
+        --sizeCaruselCardHeight: 80vh;
+    }
+}
+
+
 
 /* ---------------------------------------  CONTACT  --------------------------------------- */
 .contact{

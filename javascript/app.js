@@ -121,29 +121,8 @@ window.onscroll = () => {
             aHome.classList.remove("active");
         }
     }
-    // console.log(`Actual:${currentScrollPos}`);
-    // console.log(`Seccion:${window.innerHeight*3-50}`);
+    
 }
-
-
-
-
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyBtk7lDdq3lCWy7h0yeaXS2y95kN_QRrsI",
-    authDomain: "portfolio-form-6b930.firebaseapp.com",
-    projectId: "portfolio-form-6b930",
-    storageBucket: "portfolio-form-6b930.appspot.com",
-    messagingSenderId: "261268413758",
-    appId: "1:261268413758:web:39bb5af13d1f2ef7e4606f"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-
-//Reference contactInfocollections
-let contactInfo=firebase.database().ref("infos");
-
 
 // Form Contact
 document.querySelector(".contact-form__inputs").addEventListener("submit",submitForm);
@@ -158,47 +137,9 @@ function submitForm(e){
     let affair=document.querySelector(".affair").value;
     let text=document.querySelector(".text").value;
 
-    // console.log(name,email,phone,affair,text)
-
-    saveContactInfo(name,email,phone,affair,text);
-    retrieveInfos()
     document.querySelector(".contact-form__inputs").reset();
     sendEmail(name,email,phone,affair,text);
 }
-
-//save info to firebase
-function saveContactInfo(name,email,phone,affair,text){
-
-    let newContactInfo=contactInfo.push();
-    newContactInfo.set({
-        name:name,
-        email:email,
-        phone:phone,
-        affair:affair,
-        text:text
-    });
-}
-
-function retrieveInfos(){
-    let ref = firebase.database().ref("infos")
-    ref.on("value",gotData);
-}
-
-function gotData(data){
-    let info = data.val();
-    let keys = Object.keys(info);
-
-    for(let i=0; i < keys.length; i++){
-        let infoData = keys[i];
-        let name=info[infoData].name;
-        let email=info[infoData].email;
-        let phone=info[infoData].phone;
-        let affair=info[infoData].affair;
-        let text=info[infoData].text;
-        console.log(name,email,phone,affair,text);
-    }
-}
-
 
 function sendEmail(name,email,phone,affair,text){
     Email.send({
@@ -210,4 +151,39 @@ function sendEmail(name,email,phone,affair,text){
         Subject: `${affair} send your message`,
         Body:`${name}${phone}${email}${text}`
     }).then((message)=>alert(message));
+}
+// Choose the background on the carusel
+window.onload=function(){
+    document.querySelector(".carousel__next").addEventListener(`click`,()=>{
+        setTimeout(function(){
+            document.querySelectorAll(".glider-dot").forEach(element=>{
+                if(element.classList.contains("active")){
+                    verificar(element.getAttribute("data-index"));
+                } 
+            }); 
+        }, 500);
+        
+    });
+
+    document.querySelector(".carousel__previous").addEventListener(`click`,()=>{
+        setTimeout(function(){
+            document.querySelectorAll(".glider-dot").forEach(element=>{
+                if(element.classList.contains("active")){
+                    verificar(element.getAttribute("data-index"));
+                } 
+            }); 
+        }, 500);
+        
+    });
+    
+}
+
+let verificar=function(index){
+    if(index==0){
+        document.querySelector(".portfolio__background img").setAttribute("src","img/lyric-search-background.PNG")
+    }
+    else if(index==1){
+        document.querySelector(".portfolio__background img").setAttribute("src","img/recipe-book-background.PNG")
+    }
+    
 }
